@@ -1,8 +1,16 @@
 // POST /auth/login : la preuve, et le prénom pour dire bonjour
 export type PersonsCard = {
+  id: string;
   first: string;
   last: string;
+  date: string;
+  age: number;
+  email: string;
   city: string;
+  state: string;
+  country: string;
+  phone: string;
+  cell: string;
   pictureMedium: string;
 };
 

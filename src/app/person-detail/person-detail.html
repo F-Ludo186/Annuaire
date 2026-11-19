@@ -1,0 +1,28 @@
+<main class="person-detail-page">
+  <a class="back-link" routerLink="/">← Retour à l'annuaire</a>
+
+  @if (personne(); as person) {
+    <mat-card class="person-detail" appearance="outlined">
+      <img
+        class="person-photo"
+        [src]="person.pictureMedium"
+        [alt]="'Photo de ' + person.first + ' ' + person.last"
+      />
+
+      <mat-card-content class="person-content">
+        <h1 class="person-name">{{ person.first }} {{ person.last }}</h1>
+        <dl class="person-info">
+          <dt>Âge</dt><dd>{{ person.age }} ans</dd>
+          <dt>Email</dt><dd><a [href]="'mailto:' + person.email">{{personne()?.email}}</a></dd>
+          <dt>Téléphone</dt><dd>{{ person.phone }}</dd>
+          <dt>Portable</dt><dd>{{ person.cell }}</dd>
+          <dt>Ville</dt><dd>{{ person.city }}, {{ person.country }}</dd>
+        </dl>
+      </mat-card-content>
+    </mat-card>
+  } @else if (personneService.loading()) {
+    <p class="person-loading" role="status">Chargement de la fiche…</p>
+  } @else {
+    <p class="person-not-found">Personne introuvable.</p>
+  }
+</main>

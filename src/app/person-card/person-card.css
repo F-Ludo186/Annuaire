@@ -24,3 +24,15 @@
   color: #777;
   margin: 0;
 }
+
+.person-card__link {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: 8px;
+}
+
+.person-card__link:focus-visible {
+  outline: 3px solid var(--color-danger);
+  outline-offset: 3px;
+}

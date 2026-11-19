@@ -1,9 +1,10 @@
 
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom, timeout } from 'rxjs';
 
 import { PersonsCard, PersonApi, PeopleResponse } from '../models/person.model';
+import { PersonCard } from '../person-card/person-card';
 
 @Injectable({
     providedIn: 'root'
@@ -12,16 +13,24 @@ export class PersonService {
 
     private http = inject(HttpClient);
 
-    private apiUrl = 'https://randomuser.mee/api/?seed=cda2&results=30&nat=fr';
+    private apiUrl = 'https://randomuser.me/api/?seed=cda2&results=30&nat=fr';
     // Les fichiers de `public/` sont servis depuis la racine de l'application.
     private backupUrl = '/people-backup.json';
 
     readonly persons = signal<PersonApi[]>([]);
     readonly count = computed(() => this.persons().length);
     readonly cards = computed<PersonsCard[]>(() => this.persons().map(person => ({
+        id: person.login.uuid,
         first: person.name.first,
         last: person.name.last,
+        date: person.dob.date,
+        age: person.dob.age,
+        email: person.email,
         city: person.location.city,
+        state: person.location.state,
+        country: person.location.country,
+        phone: person.phone,
+        cell: person.cell,
         pictureMedium: person.picture.medium,
     })));
 
@@ -41,7 +50,7 @@ export class PersonService {
             let data: PersonApi[];
             try {
                 const response = await firstValueFrom(
-                    this.http.get<PeopleResponse>(this.apiUrl)
+                    this.http.get<PeopleResponse>(this.apiUrl).pipe(timeout({ first: 5000 }))
                 );
                 if (response.results.length > 0) {
                     data = response.results;
@@ -77,5 +86,9 @@ export class PersonService {
         );
 
         return response.results;
+    }
+
+    getById(id: string): PersonsCard | undefined {
+        return this.cards().find(person => person.id === id);
     }
 }

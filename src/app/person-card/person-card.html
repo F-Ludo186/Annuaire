@@ -1,5 +1,11 @@
 <mat-card class="person-card" appearance="outlined">
 
+    <a
+      class="person-card__link"
+      [routerLink]="['/personne', person().id]"
+      [attr.aria-label]="'Voir la personne ' + person().first + ' ' + person().last"
+    ></a>
+
     <img mat-card-image
     class="person-photo"
     [src]="person().pictureMedium"
