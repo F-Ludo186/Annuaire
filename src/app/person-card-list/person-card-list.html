@@ -9,9 +9,16 @@
         <p class="source-message">Données chargées depuis l’API.</p>
     }
 
-    <section class="personne-list">
-        @for (p of persons(); track $index) {
+    <section >
+        <mat-form-field class="mat-form-field" appearance="outline" floatLabel="auto" >
+            <mat-label>Recherche</mat-label>
+            <input matInput (input)="filter.set($any($event.target).value)">
+        </mat-form-field>
+  
+        <div class="personne-list">
+        @for (p of this.affichagePersonne(); track p.id) {
             <app-person-card [person]="p" />
         }
+        </div>
     </section>
 </app-async-state>
