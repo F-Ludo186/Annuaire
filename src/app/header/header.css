@@ -2,15 +2,33 @@
     box-sizing: border-box;
     display: flex;
     align-items: center;
-
-    height: 70px;
+    height: 88px;
     width: 100%;
     padding: 0 32px;
 
     background-color: var(--mat-sys-primary);
     color: var(--mat-sys-on-primary);
-
     font-family: Arial, sans-serif;
+}
+
+.header-titles {
+    display: flex;
+    flex-direction: column;
+}
+
+.header-titles h2,
+.header-titles h3 {
+    margin: 0;
+}
+
+.header-titles h2 {
     font-size: 32px;
+    line-height: 38px;
     font-weight: 700;
+}
+
+.header-titles h3 {
+    font-size: 16px;
+    line-height: 19px;
+    font-weight: 400;
 }

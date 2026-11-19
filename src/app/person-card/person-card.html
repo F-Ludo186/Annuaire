@@ -1,0 +1,14 @@
+<mat-card class="person-card" appearance="outlined">
+
+    <img mat-card-image
+    class="person-photo"
+    [src]="person().pictureMedium"
+    alt="Photo de la personne"
+    />
+
+    <mat-card-content>
+        <mat-card-title class="person-name">{{person().first}} {{person().last}}</mat-card-title>
+        <mat-card-subtitle class="person-city">{{person().city}}</mat-card-subtitle>
+    </mat-card-content>
+
+</mat-card>

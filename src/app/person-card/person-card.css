@@ -1,0 +1,26 @@
+.person-card {
+  width: 200px;
+  padding: 10px;
+  align-items: center;
+  text-align: center;
+}
+
+.person-photo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50px !important;
+  object-fit: cover;
+  margin: 0 auto 15px;
+}
+
+.person-name {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0 0 5px;
+}
+
+.person-city {
+  font-size: 12px;
+  color: #777;
+  margin: 0;
+}

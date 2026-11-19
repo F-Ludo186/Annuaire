@@ -1,3 +1,13 @@
 <header class="header">
-  <h2>{{ title() }}</h2>
+  <div class="header-titles">
+    <h2>{{ title() }}</h2>
+    @if (loading()) {
+      <h3>0 personnes</h3>
+    } @else if (error(); as message) {
+      <h3>0 personnes</h3>
+    } @else {
+      <h3>{{ personCount() }} personnes</h3>
+    }
+    
+  </div>
 </header>   

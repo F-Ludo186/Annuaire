@@ -1,0 +1,17 @@
+ <app-async-state
+    [loading]="loading()"
+    [error]="error()"
+    loadingText="Chargement de l'annuaire…" >
+    
+    @if (loadedFromBackup()) {
+        <p class="source-message">Données chargées depuis la sauvegarde.</p>
+    } @else {
+        <p class="source-message">Données chargées depuis l’API.</p>
+    }
+
+    <section class="personne-list">
+        @for (p of persons(); track $index) {
+            <app-person-card [person]="p" />
+        }
+    </section>
+</app-async-state>
