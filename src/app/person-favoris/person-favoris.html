@@ -1,0 +1,14 @@
+<section>
+    <h1 class="title">Mes favoris</h1>
+
+    @if(this.personsfavoris().length > 0)
+    {
+    <div class="personne-list">
+        @for (p of this.personsfavoris(); track p.id) {
+            <app-person-card [person]="p" />
+        }
+    </div>
+    } @else {
+        <p class="message">Pas de favoris</p>
+    }
+</section>

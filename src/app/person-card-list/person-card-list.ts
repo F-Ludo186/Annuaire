@@ -25,7 +25,6 @@ export class PersonCardList {
   affichagePersonne = computed(() => {
     const value = this.filter().trim().toLowerCase();
 
-    //if (!value || value?.trim().length < 3) {
     if (!value) {
         return this.persons();
     }
@@ -33,5 +32,5 @@ export class PersonCardList {
     return this.persons().filter(p =>
         (p.first + " " + p.last).toLowerCase().includes(value)
     );
-});
+  }); 
 }

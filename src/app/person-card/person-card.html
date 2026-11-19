@@ -1,16 +1,32 @@
 <mat-card class="person-card" appearance="outlined">
+    <button
+      class="person-card__favorite"
+      type="button"
+      [attr.aria-label]="person().favori ? 'Retirer des favoris' : 'Ajouter aux favoris'"
+      [attr.aria-pressed]="person().favori"
+      (click)="changefav($event)"
+    >
+      <svg
+        class="person-card__star"
+        [class.is-favorite]="person().favori"
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+      >
+        <path d="M12 2.5 14.94 8.46l6.58.96-4.76 4.64 1.12 6.55L12 17.52l-5.88 3.09 1.12-6.55-4.76-4.64 6.58-.96L12 2.5Z" />
+      </svg>
+    </button>
 
     <a
       class="person-card__link"
       [routerLink]="['/personne', person().id]"
       [attr.aria-label]="'Voir la personne ' + person().first + ' ' + person().last"
     ></a>
-
-    <img mat-card-image
-    class="person-photo"
-    [src]="person().pictureMedium"
-    alt="Photo de la personne"
-    />
+   
+        <img mat-card-image
+        class="person-photo"
+        [src]="person().pictureMedium"
+        alt="Photo de la personne"
+        />
 
     <mat-card-content>
         <mat-card-title class="person-name">{{person().first}} {{person().last}}</mat-card-title>

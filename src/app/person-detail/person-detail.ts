@@ -15,4 +15,9 @@ export class PersonDetail {
   id = input.required<string>(); 
   
   personne = computed(() => this.personneService.getById(this.id()));
+
+  changefav(event: MouseEvent): void {
+    event.stopPropagation();
+    this.personneService.toggleFavorite(this.id());
+  }
 }

@@ -1,13 +1,21 @@
 <header class="header">
   <div class="header-titles">
     <h2>{{ title() }}</h2>
-    @if (loading()) {
-      <h3>0 personnes</h3>
-    } @else if (error(); as message) {
+    @if (loading() || error()) {
       <h3>0 personnes</h3>
     } @else {
       <h3>{{ personCount() }} personnes</h3>
     }
-    
   </div>
-</header>   
+
+  <nav class="header-nav" aria-label="Navigation principale">
+    <a mat-button routerLink="/">
+      <mat-icon>people</mat-icon>
+      Annuaire
+    </a>
+    <a mat-button routerLink="/favoris">
+      <mat-icon>star</mat-icon>
+      Favoris
+    </a>
+  </nav>
+</header>

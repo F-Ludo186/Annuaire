@@ -12,6 +12,7 @@ export type PersonsCard = {
   phone: string;
   cell: string;
   pictureMedium: string;
+  favori:boolean;
 };
 
 export type PersonApi = {
