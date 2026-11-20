@@ -1,6 +1,7 @@
 // POST /auth/login : la preuve, et le prénom pour dire bonjour
 export type PersonsCard = {
   id: string;
+  genre:Gender;
   first: string;
   last: string;
   date: string;
@@ -14,6 +15,8 @@ export type PersonsCard = {
   pictureMedium: string;
   favori:boolean;
 };
+
+export type NewPerson = Omit<PersonsCard, 'id' | 'favori'>;
 
 export type PersonApi = {
   gender: Gender;

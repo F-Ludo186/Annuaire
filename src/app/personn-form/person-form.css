@@ -1,0 +1,59 @@
+
+.personneForm {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+     width: 66%;
+    margin: 15px auto;
+    box-sizing: border-box;    
+}
+
+.personneForm .mat-form-field {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+/* Hauteur réelle de la zone de saisie */
+.personneForm .mat-mdc-form-field-infix {
+    min-height: 40px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    box-sizing: border-box;
+}
+
+/* Taille du texte saisi */
+.personneForm input.mat-mdc-input-element {
+    font-size: 14px;
+}
+
+/* Messages d'erreur */
+.personneForm mat-error {
+    font-size: 12px;
+    line-height: 14px;
+}
+
+/* Hauteur minimale de la zone des messages */
+.personneForm .mat-mdc-form-field-subscript-wrapper {
+    font-size: 12px;
+}
+
+.personneForm-row {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+}
+
+.personneForm-row mat-form-field {
+    flex: 1;
+    min-width: 0;
+}
+
+.AjouterPersonne {
+    display: block;
+    margin-left: auto;
+}
+
+.avatarImg {
+    height: 50px;
+    width: 50px;
+}

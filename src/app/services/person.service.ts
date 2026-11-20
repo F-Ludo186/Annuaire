@@ -3,14 +3,13 @@ import { Injectable, afterNextRender, computed, inject, signal } from '@angular/
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom, timeout } from 'rxjs';
 
-import { PersonsCard, PersonApi, PeopleResponse } from '../models/person.model';
+import { NewPerson, PersonsCard, PersonApi, PeopleResponse } from '../models/person.model';
 
 
 @Injectable({
     providedIn: 'root'
 })
 export class PersonService {
-
     private readonly favoritesStorageKey = 'annuaire-favorites';
 
     private http = inject(HttpClient);
@@ -20,25 +19,34 @@ export class PersonService {
     private backupUrl = '/people-backup.json';
 
     readonly persons = signal<PersonApi[]>([]);
+    private readonly addedPersons = signal<PersonsCard[]>([]);
     private readonly favoriteIds = signal<Set<string>>(new Set());
-    readonly count = computed(() => this.persons().length);
     readonly favoriteCount = computed(() => this.favoriteIds().size);
-    readonly cards = computed<PersonsCard[]>(() => this.persons().map(person => ({
-        id: person.login.uuid,
-        first: person.name.first,
-        last: person.name.last,
-        date: person.dob.date,
-        age: person.dob.age,
-        email: person.email,
-        city: person.location.city,
-        state: person.location.state,
-        country: person.location.country,
-        phone: person.phone,
-        cell: person.cell,
-        pictureMedium: person.picture.medium,
-        favori: this.favoriteIds().has(person.login.uuid)
-    })));
 
+    readonly cards = computed<PersonsCard[]>(() => [
+         ...this.addedPersons().map(person => ({
+            ...person,
+            favori: this.favoriteIds().has(person.id)
+        })),
+        ...this.persons().map(person => ({
+            id: person.login.uuid,
+            genre: person.gender,
+            first: person.name.first,
+            last: person.name.last,
+            date: person.dob.date,
+            age: person.dob.age,
+            email: person.email,
+            city: person.location.city,
+            state: person.location.state,
+            country: person.location.country,
+            phone: person.phone,
+            cell: person.cell,
+            pictureMedium: person.picture.medium,
+            favori: this.favoriteIds().has(person.login.uuid)
+        }))
+    ]);
+    readonly count = computed(() => this.cards().length);
+    
     loading = signal(true);                  
     error = signal<string | null>(null);
     readonly loadedFromBackup = signal(false);
@@ -115,6 +123,16 @@ export class PersonService {
         return this.cards().find(person => person.id === id);
     }
 
+    addPersonne(personne: NewPerson): void {
+        const nouvellePersonne: PersonsCard = {
+            ...personne,
+            id: crypto.randomUUID(),
+            favori: false,
+        };
+
+        this.addedPersons.update(personnes => [nouvellePersonne, ...personnes]);
+    }
+
     toggleFavorite(id: string): void {
         this.favoriteIds.update(identifiants => {
             const next = new Set(identifiants);
@@ -128,4 +146,6 @@ export class PersonService {
             return next;
         });
     }
+
+    
 }
