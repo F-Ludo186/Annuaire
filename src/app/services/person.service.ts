@@ -22,6 +22,7 @@ export class PersonService {
     readonly persons = signal<PersonApi[]>([]);
     private readonly favoriteIds = signal<Set<string>>(new Set());
     readonly count = computed(() => this.persons().length);
+    readonly favoriteCount = computed(() => this.favoriteIds().size);
     readonly cards = computed<PersonsCard[]>(() => this.persons().map(person => ({
         id: person.login.uuid,
         first: person.name.first,
@@ -115,8 +116,8 @@ export class PersonService {
     }
 
     toggleFavorite(id: string): void {
-        this.favoriteIds.update(current => {
-            const next = new Set(current);
+        this.favoriteIds.update(identifiants => {
+            const next = new Set(identifiants);
             if (next.has(id)) next.delete(id);
             else next.add(id);
             try {

@@ -16,4 +16,5 @@ export class Header {
   personCount = input(0);
   loading = this.personService.loading;                  
   error = this.personService.error;   
+  favoriteCount = this.personService.favoriteCount;
 }  
