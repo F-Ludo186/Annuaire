@@ -42,7 +42,7 @@
             [disabled]="page() === 0"
             (click)="page.set(page() - 1)"
              mat-icon-button>
-                <mat-icon aria-label="Suivant">chevron_backward</mat-icon>
+                <mat-icon aria-label="Precedent">chevron_backward</mat-icon>
             </button>
 
             <span class="paginationText">Page {{ page() + 1 }} sur {{ pageCount() }}</span>
