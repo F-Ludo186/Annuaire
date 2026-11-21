@@ -3,10 +3,11 @@ import { PersonDetail } from './person-detail/person-detail';
 import { PersonCardList } from './person-card-list/person-card-list';
 import { PersonFavoris } from './person-favoris/person-favoris';
 import { PersonForm } from './personn-form/person-form';
+import { hasFavoritesGuardGuard } from './has-favorites-guard-guard';
 
 export const routes: Routes = [
     { path: '', component: PersonCardList },
     { path: 'ajouter', component: PersonForm },
-    { path: 'favoris', component: PersonFavoris },
+    { path: 'favoris', component: PersonFavoris , canActivate: [hasFavoritesGuardGuard] },
     { path: 'personne/:id', component: PersonDetail }
 ];
