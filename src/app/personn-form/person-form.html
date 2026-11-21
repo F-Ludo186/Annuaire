@@ -1,93 +1,95 @@
-<section class="personneForm">  
-    <h1>Ajouter un contact</h1>
+<main>
+    <section class="personneForm">  
+        <h1>Ajouter un contact</h1>
 
-    <form [formRoot]="PersonForm">
-        <div class="personneForm-row">
+        <form [formRoot]="PersonForm">
+            <div class="personneForm-row">
+                <mat-form-field class="mat-form-field" appearance="outline" floatLabel="always" subscriptSizing="dynamic">
+                    <mat-label>Adresse de la photo</mat-label>
+                    <input matInput aria-label="Adresse de la photo" [formField]="PersonForm.pictureMedium">
+                    @if (PersonForm.pictureMedium().touched()) {
+                    @for (error of PersonForm.pictureMedium().errors(); track error) {
+                        <mat-error>{{ error.message }}</mat-error>
+                    }}
+                </mat-form-field>
+                
+                @if (PersonForm.pictureMedium().value(); as imageUrl) {
+                <img class="avatarImg" [src]="imageUrl" alt="Aperçu de la photo" />
+                }
+            </div>
+            <div class="personneForm-row">
+                <mat-form-field class="mat-form-field" appearance="outline" floatLabel="always" subscriptSizing="dynamic">
+                    <mat-label>Prénom</mat-label>
+                <input matInput aria-label="Prénom" [formField]="PersonForm.first">
+                    @if (PersonForm.first().touched()) {
+                    @for (error of PersonForm.first().errors(); track error) {
+                        <mat-error>{{ error.message }}</mat-error>
+                    }}
+                </mat-form-field>
+                
+                <mat-form-field class="mat-form-field" appearance="outline" floatLabel="always" subscriptSizing="dynamic">
+                    <mat-label>Nom</mat-label>
+                <input matInput aria-label="Nom" [formField]="PersonForm.last">
+                    @if (PersonForm.last().touched()) {
+                    @for (error of PersonForm.last().errors(); track error) {
+                        <mat-error>{{ error.message }}</mat-error>
+                    }}
+                </mat-form-field>
+            </div>
+
+            <div class="personneForm-row">
+                <mat-form-field  class="mat-form-field" appearance="outline" floatLabel="always" subscriptSizing="dynamic">
+                    <mat-label>Genre</mat-label>
+                <mat-select aria-label="Genre" [formField]="PersonForm.genre">
+                        @for (genre of genres; track genre.value) {
+                        <mat-option [value]="genre.value">{{genre.label}}</mat-option>
+                        }
+                    </mat-select>
+                    @if (PersonForm.genre().touched()) {
+                        @for (error of PersonForm.genre().errors(); track error) {
+                        <mat-error>{{ error.message }}</mat-error>
+                    }}
+                </mat-form-field>
+
+                <mat-form-field class="mat-form-field" appearance="outline" floatLabel="always" subscriptSizing="dynamic">
+                    <mat-label>Age</mat-label>
+                <input matInput aria-label="Âge" type="number" [formField]="PersonForm.age">
+                    @if (PersonForm.age().touched()) {
+                    @for (error of PersonForm.age().errors(); track error) {
+                        <mat-error>{{ error.message }}</mat-error>
+                    }}
+                </mat-form-field>
+            </div>
+
             <mat-form-field class="mat-form-field" appearance="outline" floatLabel="always" subscriptSizing="dynamic">
-                <mat-label>avantar</mat-label>
-                <input matInput  [formField]="PersonForm.pictureMedium">
-                @if (PersonForm.pictureMedium().touched()) {
-                @for (error of PersonForm.pictureMedium().errors(); track error) {
+                <mat-label>Email</mat-label>
+            <input matInput aria-label="Email" [formField]="PersonForm.email">
+                
+                @if (PersonForm.email().touched()) {
+                    @for (error of PersonForm.email().errors(); track error) {
                     <mat-error>{{ error.message }}</mat-error>
                 }}
             </mat-form-field>
+
+            <div class="personneForm-row">
+                <mat-form-field class="mat-form-field" appearance="outline" floatLabel="always" subscriptSizing="dynamic">
+                    <mat-label>Ville</mat-label>
+                <input matInput aria-label="Ville" [formField]="PersonForm.city">
+                    @if (PersonForm.city().touched()) {
+                    @for (error of PersonForm.city().errors(); track error) {
+                    <mat-error>{{ error.message }}</mat-error>
+                }}
+                </mat-form-field>
+
+                <mat-form-field class="mat-form-field" appearance="outline" floatLabel="always" subscriptSizing="dynamic">
+                    <mat-label>Téléphone (facultatif)</mat-label>
+                <input matInput aria-label="Téléphone (facultatif)" [formField]="PersonForm.phone">
+                </mat-form-field>
+            </div>
             
-            @if (PersonForm.pictureMedium().value(); as imageUrl) {
-            <img class="avatarImg" [src]="imageUrl" alt="Aperçu de la photo" />
-            }
-        </div>
-        <div class="personneForm-row">
-            <mat-form-field class="mat-form-field" appearance="outline" floatLabel="always" subscriptSizing="dynamic">
-                <mat-label>Prénom</mat-label>
-                <input matInput  [formField]="PersonForm.first">
-                @if (PersonForm.first().touched()) {
-                @for (error of PersonForm.first().errors(); track error) {
-                    <mat-error>{{ error.message }}</mat-error>
-                }}
-            </mat-form-field>
-            
-            <mat-form-field class="mat-form-field" appearance="outline" floatLabel="always" subscriptSizing="dynamic">
-                <mat-label>Nom</mat-label>
-                <input matInput  [formField]="PersonForm.last">
-                @if (PersonForm.last().touched()) {
-                @for (error of PersonForm.last().errors(); track error) {
-                    <mat-error>{{ error.message }}</mat-error>
-                }}
-            </mat-form-field>
-        </div>
-
-        <div class="personneForm-row">
-            <mat-form-field  class="mat-form-field" appearance="outline" floatLabel="always" subscriptSizing="dynamic">
-                <mat-label>Genre</mat-label>
-                <mat-select [formField]="PersonForm.genre">
-                    @for (genre of genres; track genre.value) {
-                    <mat-option [value]="genre.value">{{genre.label}}</mat-option>
-                    }
-                </mat-select>
-                @if (PersonForm.genre().touched()) {
-                    @for (error of PersonForm.genre().errors(); track error) {
-                    <mat-error>{{ error.message }}</mat-error>
-                }}
-            </mat-form-field>
-
-            <mat-form-field class="mat-form-field" appearance="outline" floatLabel="always" subscriptSizing="dynamic">
-                <mat-label>Age</mat-label>
-                <input matInput type="number" [formField]="PersonForm.age">
-                @if (PersonForm.age().touched()) {
-                @for (error of PersonForm.age().errors(); track error) {
-                    <mat-error>{{ error.message }}</mat-error>
-                }}
-            </mat-form-field>
-        </div>
-
-        <mat-form-field class="mat-form-field" appearance="outline" floatLabel="always" subscriptSizing="dynamic">
-            <mat-label>Email</mat-label>
-            <input matInput [formField]="PersonForm.email">
-            
-            @if (PersonForm.email().touched()) {
-                @for (error of PersonForm.email().errors(); track error) {
-                <mat-error>{{ error.message }}</mat-error>
-            }}
-        </mat-form-field>
-
-        <div class="personneForm-row">
-            <mat-form-field class="mat-form-field" appearance="outline" floatLabel="always" subscriptSizing="dynamic">
-                <mat-label>Ville</mat-label>
-                <input matInput [formField]="PersonForm.city">
-                @if (PersonForm.city().touched()) {
-                @for (error of PersonForm.city().errors(); track error) {
-                <mat-error>{{ error.message }}</mat-error>
-            }}
-            </mat-form-field>
-
-            <mat-form-field class="mat-form-field" appearance="outline" floatLabel="always" subscriptSizing="dynamic">
-                <mat-label>Téléphone (facultatif)</mat-label>
-                <input matInput [formField]="PersonForm.phone">
-            </mat-form-field>
-        </div>
-        
-        <button class="AjouterPersonne" type="submit" matButton="outlined" >
-         Ajouter le contact
-        </button>
-    </form>
-</section>
+        <button class="AjouterPersonne" type="submit" matButton="outlined" aria-label="Ajouter le contact">
+            Ajouter le contact
+            </button>
+        </form>
+    </section>
+</main>

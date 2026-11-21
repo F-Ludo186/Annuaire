@@ -25,7 +25,7 @@
         <img mat-card-image
         class="person-photo"
         [src]="person().pictureMedium"
-        alt="Photo de la personne"
+        [alt]="'Portrait de ' + person().first + ' ' + person().last"
         />
 
     <mat-card-content>
