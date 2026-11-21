@@ -21,7 +21,6 @@ export class PersonService {
     readonly persons = signal<PersonApi[]>([]);
     private readonly addedPersons = signal<PersonsCard[]>([]);
     private readonly favoriteIds = signal<Set<string>>(new Set());
-    readonly favoriteCount = computed(() => this.favoriteIds().size);
 
     readonly cards = computed<PersonsCard[]>(() => [
          ...this.addedPersons().map(person => ({
@@ -46,6 +45,9 @@ export class PersonService {
         }))
     ]);
     readonly count = computed(() => this.cards().length);
+    readonly favoriteCount = computed(() =>
+        this.cards().filter(person => person.favori).length
+    );
     
     loading = signal(true);                  
     error = signal<string | null>(null);

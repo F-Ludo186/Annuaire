@@ -8,11 +8,44 @@
 }
 
 .source-message {
+    position: relative;
     margin: 12px 15px 0;
     font-size: 12px;
     color: #666;
 }
 
 .mat-form-field {
-    margin: 15px;
+    margin: 5px 15px;
+}
+
+.genre-filter-row {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+.filter-count {
+    margin-bottom: 5px;
+    color: #555;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.Pagination {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.paginationText {
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+}
+
+.Pagination button {
+    border-radius: 50px;
 }

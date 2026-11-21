@@ -2,23 +2,58 @@
     [loading]="loading()"
     [error]="error()"
     loadingText="Chargement de l'annuaire…" >
-    
-    @if (loadedFromBackup()) {
-        <p class="source-message">Données chargées depuis la sauvegarde.</p>
-    } @else {
-        <p class="source-message">Données chargées depuis l’API.</p>
-    }
 
     <section >
-        <mat-form-field class="mat-form-field" appearance="outline" floatLabel="auto" >
-            <mat-label>Recherche</mat-label>
-            <input matInput (input)="filter.set($any($event.target).value)">
-        </mat-form-field>
+        
+         <div class="genre-filter-row">
+                
+            <mat-form-field class="mat-form-field" appearance="outline" floatLabel="always" subscriptSizing="dynamic">
+                <mat-label>Recherche</mat-label>
+                <input matInput (input)="rechercher($any($event.target).value)">
+            </mat-form-field>
+       
+            <mat-form-field class="mat-form-field" appearance="outline" floatLabel="always" subscriptSizing="dynamic">
+                <mat-label>Genre</mat-label>
+                <mat-select [value]="genre()" (selectionChange)="filtrerParGenre($event.value)">
+                    @for (genre of genres; track genre.value) {
+                    <mat-option [value]="genre.value">{{genre.label}}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+            @if(this.genre() || this.filter()){
+            <span class="filter-count" aria-live="polite">
+                {{ affichagePersonne().length }} contact{{ affichagePersonne().length === 1 ? '' : 's' }} trouvé{{ affichagePersonne().length === 1 ? '' : 's' }}
+            </span>
+            }
+        </div>
   
         <div class="personne-list">
-        @for (p of this.affichagePersonne(); track p.id) {
+        @for (p of this.personnesPage(); track p.id) {
             <app-person-card [person]="p" />
         }
+        @empty { 
+            <p>Aucune correspondance ...</p>
+        }
         </div>
+
+        <nav class="Pagination" aria-label="Pagination">
+            <button
+            type="button"
+            [disabled]="page() === 0"
+            (click)="page.set(page() - 1)"
+             mat-icon-button>
+                <mat-icon aria-label="Suivant">chevron_backward</mat-icon>
+            </button>
+
+            <span class="paginationText">Page {{ page() + 1 }} sur {{ pageCount() }}</span>
+
+            <button
+                type="button"
+                [disabled]="page() >= pageCount() - 1"
+                (click)="page.set(page() + 1)"
+                mat-icon-button>
+                <mat-icon aria-label="Suivant">chevron_forward</mat-icon>
+            </button>
+        </nav>
     </section>
 </app-async-state>
