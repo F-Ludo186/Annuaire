@@ -50,6 +50,8 @@ export class PersonCardList {
     });
   }); 
 
+  // skeletom
+  readonly skeletonCards = Array.from({ length: 10 });
   // gestion pagination
   readonly pageSize = 10;
   readonly page = signal(0);

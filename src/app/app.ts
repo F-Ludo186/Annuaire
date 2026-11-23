@@ -3,9 +3,10 @@ import { RouterOutlet } from '@angular/router';
 import { Header } from './header/header';
 import { PersonService } from './services/person.service';
 import { Footer } from './footer/footer';
+import { MobileNav } from './mobile-nav/mobile-nav';
 
 @Component({
-  imports: [RouterOutlet, Header,Footer],
+  imports: [RouterOutlet, Header, Footer, MobileNav],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',

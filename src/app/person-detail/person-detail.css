@@ -114,3 +114,40 @@
     padding: 20px 16px;
   }
 }
+
+@media (max-width: 600px), (orientation: landscape) and (max-height: 600px) {
+  .person-detail {
+    display: grid;
+    grid-template-columns: 88px minmax(0, 1fr);
+    align-items: start;
+    column-gap: 14px;
+    width: 100%;
+    min-height: 0;
+    padding: 16px;
+  }
+
+  .person-detail .person-photo {
+    grid-row: 1;
+    width: 80px;
+    height: 80px;
+    margin: 0;
+  }
+
+  .person-detail .person-content {
+    grid-column: 2;
+    grid-row: 1;
+    min-width: 0;
+  }
+
+  .person-name {
+    padding-right: 28px;
+    font-size: 20px;
+    overflow-wrap: anywhere;
+  }
+
+  .person-info {
+    grid-template-columns: 72px minmax(0, 1fr);
+    column-gap: 8px;
+    font-size: 14px;
+  }
+}

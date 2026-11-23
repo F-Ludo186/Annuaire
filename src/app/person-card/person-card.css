@@ -1,8 +1,11 @@
 .person-card {
   position: relative;
+  box-sizing: border-box;
   width: 200px;
-  height: 180px;
+  min-height: 180px;
   padding: 10px;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   text-align: center;
 }
@@ -77,4 +80,38 @@
 .person-card__link:focus-visible {
   outline: 3px solid var(--color-danger);
   outline-offset: 3px;
+}
+
+@media (max-width: 600px), (orientation: landscape) and (max-height: 600px) {
+  :host {
+    display: block;
+    width: 100%;
+  }
+
+  .person-card {
+    width: 100%;
+    min-height: 112px;
+    height: auto;
+    flex-direction: row;
+    gap: 14px;
+    padding: 12px 52px 12px 12px;
+    text-align: left;
+  }
+
+  .person-photo {
+    flex: 0 0 80px;
+    width: 80px;
+    height: 80px;
+    margin: 0;
+  }
+
+  .person-card mat-card-content {
+    min-width: 0;
+    padding: 0;
+  }
+
+  .person-name,
+  .person-city {
+    overflow-wrap: anywhere;
+  }
 }

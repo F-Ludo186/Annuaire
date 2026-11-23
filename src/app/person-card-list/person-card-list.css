@@ -1,10 +1,13 @@
 .personne-list {
     display: flex;
-    flex-direction:row;
+    flex-direction: row;
     flex-wrap: wrap;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 15px;
     margin: 15px;
+}
+
+app-person-card {
+    display: block;
 }
 
 .source-message {
@@ -48,4 +51,104 @@
 
 .Pagination button {
     border-radius: 50px;
+}
+
+@media (max-width: 600px), (orientation: landscape) and (max-height: 600px) {
+    .personne-list {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        margin: 12px;
+    }
+
+    app-person-card {
+        flex: 0 0 100%;
+        width: 100%;
+    }
+
+    .genre-filter-row {
+        align-items: stretch;
+        padding-inline: 12px;
+    }
+
+    .genre-filter-row mat-form-field {
+        flex: 1 1 100%;
+        min-width: 0;
+        margin: 5px 0;
+    }
+
+    .filter-count {
+        flex-basis: 100%;
+    }
+}
+
+/* Skeleton */
+.skeleton-search,
+.skeleton-filter {
+    width: 200px;
+    height: 56px;
+    margin: 5px 15px;
+    border-radius: 4px;
+    background: #e5e7eb;
+    animation: skeleton-pulse 1.2s ease-in-out infinite alternate;
+}
+
+.skeleton-rectangle {
+    width: 200px;
+    height: 180px;
+    border-radius: 8px;
+    background: #e5e7eb;
+    animation: skeleton-pulse 1.2s ease-in-out infinite alternate;
+}
+
+.skeleton-page-button,
+.skeleton-page-text {
+    background: #e5e7eb;
+    animation: skeleton-pulse 1.2s ease-in-out infinite alternate;
+}
+
+.skeleton-page-button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.skeleton-page-text {
+    width: 100px;
+    height: 16px;
+    border-radius: 4px;
+}
+
+@keyframes skeleton-pulse {
+    from { opacity: 0.55; }
+    to { opacity: 1; }
+}
+
+@media (max-width: 600px), (orientation: landscape) and (max-height: 600px) {
+    .skeleton-search,
+    .skeleton-filter {
+        flex: 1 1 100%;
+        width: auto;
+        margin: 5px 0;
+    }
+
+    .skeleton-rectangle {
+        width: 100%;
+        height: 112px;
+    }
+
+    .skeleton-page-button {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .skeleton-search,
+    .skeleton-filter,
+    .skeleton-rectangle,
+    .skeleton-page-button,
+    .skeleton-page-text {
+        animation: none;
+    }
 }

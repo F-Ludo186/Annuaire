@@ -56,4 +56,22 @@
 .avatarImg {
     height: 50px;
     width: 50px;
+    object-fit: cover;
+}
+
+@media (max-width: 600px), (orientation: landscape) and (max-height: 600px) {
+    .personneForm {
+        width: 100%;
+        max-width: 100%;
+        padding-inline: 16px;
+    }
+
+    .personneForm-row {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .personneForm-row mat-form-field {
+        width: 100%;
+    }
 }

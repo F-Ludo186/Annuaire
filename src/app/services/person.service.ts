@@ -82,8 +82,11 @@ export class PersonService {
         try {
             let data: PersonApi[];
             try {
+                // temporisation pour apercevoire les skeleton
+                await this.Sleep(1000);
+                
                 const response = await firstValueFrom(
-                    this.http.get<PeopleResponse>(this.apiUrl).pipe(timeout({ first: 5000 }))
+                    this.http.get<PeopleResponse>(this.apiUrl).pipe(timeout({ first: 1000 }))
                 );
                 if (response.results.length > 0) {
                     data = response.results;
@@ -149,5 +152,7 @@ export class PersonService {
         });
     }
 
-    
+    Sleep(ms: number) {
+        return new Promise( resolve => setTimeout(resolve, ms) );
+    }
 }

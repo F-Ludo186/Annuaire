@@ -9,3 +9,13 @@
   text-align: center;
   gap: 1rem;
 }
+
+@media (max-width: 600px), (orientation: landscape) and (max-height: 600px) {
+  .site-footer {
+    min-height: 3rem;
+    height: auto;
+    padding: 10px 12px;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+  }
+}

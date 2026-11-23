@@ -8,3 +8,21 @@
 app-footer {
   margin-top: auto;
 }
+
+main {
+  min-width: 0;
+}
+
+@media (pointer: coarse) {
+  .header a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 48px;
+  }
+}
+
+@media (max-width: 600px), (orientation: landscape) and (max-height: 600px) {
+  :host {
+    padding-bottom: calc(56px + env(safe-area-inset-bottom));
+  }
+}

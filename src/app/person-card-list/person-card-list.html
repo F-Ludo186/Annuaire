@@ -1,63 +1,88 @@
 <main>
-    <app-async-state
-        [loading]="loading()"
-        [error]="error()"
-        loadingText="Chargement de l'annuaire…" >
+    @if (loading()) {
+        <section class="skeleton-state" role="status" aria-label="Chargement de l’annuaire">
+            <p class="visually-hidden">Chargement de l’annuaire…</p>
 
-        <section >
-            
-            <div class="genre-filter-row">
-                <h1 class="visually-hidden">Annuaire des personnes</h1>  
-                <mat-form-field class="mat-form-field" appearance="outline" floatLabel="always" subscriptSizing="dynamic">
-                    <mat-label>Recherche</mat-label>
-                    <input matInput aria-label="Recherche" (input)="rechercher($any($event.target).value)">
-                </mat-form-field>
-        
-                <mat-form-field class="mat-form-field" appearance="outline" floatLabel="always" subscriptSizing="dynamic">
-                    <mat-label>Genre</mat-label>
-                    <mat-select aria-label="Filtrer par genre" [value]="genre()" (selectionChange)="filtrerParGenre($event.value)">
-                        @for (genre of genres; track genre.value) {
-                        <mat-option [value]="genre.value">{{genre.label}}</mat-option>
-                        }
-                    </mat-select>
-                </mat-form-field>
-                @if(this.genre() || this.filter()){
-                <span class="filter-count" aria-live="polite">
-                    {{ affichagePersonne().length }} contact{{ affichagePersonne().length === 1 ? '' : 's' }} trouvé{{ affichagePersonne().length === 1 ? '' : 's' }}
-                </span>
+                <div class="genre-filter-row">
+                    <h1 class="visually-hidden">Annuaire des personnes</h1>  
+                    <div class="skeleton-search" aria-hidden="true"></div>
+                    <div class="skeleton-filter" aria-hidden="true"></div>
+                </div>
+
+            <div class="personne-list" aria-hidden="true">
+                @for (skeleton of skeletonCards; track $index) {
+                    <div class="skeleton-rectangle"></div>
                 }
             </div>
-    
-            <div class="personne-list">
-            @for (p of this.personnesPage(); track p.id) {
-                <app-person-card [person]="p" />
-            }
-            @empty { 
-                <p>Aucune correspondance ...</p>
-            }
+
+            <div class="Pagination skeleton-pagination" aria-hidden="true">
+                <div class="skeleton-page-button"></div>
+                <div class="skeleton-page-text"></div>
+                <div class="skeleton-page-button"></div>
             </div>
 
-            <nav class="Pagination" aria-label="Pagination">
-                <button
-                type="button"
-                aria-label="Page précédente"
-                [disabled]="page() === 0"
-                (click)="page.set(page() - 1)"
-                mat-icon-button>
-                    <mat-icon aria-hidden="true">chevron_backward</mat-icon>
-                </button>
-
-                <span class="paginationText">Page {{ page() + 1 }} sur {{ pageCount() }}</span>
-
-                <button
-                    type="button"
-                    aria-label="Page suivante"
-                    [disabled]="page() >= pageCount() - 1"
-                    (click)="page.set(page() + 1)"
-                    mat-icon-button>
-                    <mat-icon aria-hidden="true">chevron_forward</mat-icon>
-                </button>
-            </nav>
         </section>
-    </app-async-state>
+    } @else {
+        <app-async-state
+            [loading]="false"
+            [error]="error()"
+            loadingText="Chargement de l’annuaire…">
+
+            <section >
+                
+                <div class="genre-filter-row">
+                    <h1 class="visually-hidden">Annuaire des personnes</h1>  
+                    <mat-form-field class="mat-form-field" appearance="outline" floatLabel="always" subscriptSizing="dynamic">
+                        <mat-label>Recherche</mat-label>
+                        <input matInput aria-label="Recherche" (input)="rechercher($any($event.target).value)">
+                    </mat-form-field>
+            
+                    <mat-form-field class="mat-form-field" appearance="outline" floatLabel="always" subscriptSizing="dynamic">
+                        <mat-label>Genre</mat-label>
+                        <mat-select aria-label="Filtrer par genre" [value]="genre()" (selectionChange)="filtrerParGenre($event.value)">
+                            @for (genre of genres; track genre.value) {
+                            <mat-option [value]="genre.value">{{genre.label}}</mat-option>
+                            }
+                        </mat-select>
+                    </mat-form-field>
+                    @if(this.genre() || this.filter()){
+                    <span class="filter-count" aria-live="polite">
+                        {{ affichagePersonne().length }} contact{{ affichagePersonne().length === 1 ? '' : 's' }} trouvé{{ affichagePersonne().length === 1 ? '' : 's' }}
+                    </span>
+                    }
+                </div>
+        
+                <div class="personne-list">
+                @for (p of this.personnesPage(); track p.id) {
+                    <app-person-card [person]="p" />
+                }
+                @empty { 
+                    <p>Aucune correspondance ...</p>
+                }
+                </div>
+
+                <nav class="Pagination" aria-label="Pagination">
+                    <button
+                    type="button"
+                    aria-label="Page précédente"
+                    [disabled]="page() === 0"
+                    (click)="page.set(page() - 1)"
+                    mat-icon-button>
+                        <mat-icon aria-hidden="true">chevron_backward</mat-icon>
+                    </button>
+
+                    <span class="paginationText">Page {{ page() + 1 }} sur {{ pageCount() }}</span>
+
+                    <button
+                        type="button"
+                        aria-label="Page suivante"
+                        [disabled]="page() >= pageCount() - 1"
+                        (click)="page.set(page() + 1)"
+                        mat-icon-button>
+                        <mat-icon aria-hidden="true">chevron_forward</mat-icon>
+                    </button>
+                </nav>
+            </section>
+        </app-async-state>
+    }
 </main>

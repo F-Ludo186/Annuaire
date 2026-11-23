@@ -10,16 +10,16 @@
 
   <nav class="header-nav" aria-label="Navigation principale">
     <a mat-button routerLink="/" aria-label="Annuaire">
-      <mat-icon>people</mat-icon>
+      <mat-icon fontSet="material-symbols-outlined">people</mat-icon>
       Annuaire
     </a>
     <a mat-button routerLink="/favoris" [attr.aria-label]="'Favoris, ' + favoriteCount()">
-      <mat-icon>star</mat-icon>
+      <mat-icon fontSet="material-symbols-outlined">star</mat-icon>
       Favoris ( {{ favoriteCount() }} )
     </a>
 
     <a mat-button routerLink="/ajouter" aria-label="Ajouter un contact">
-      <mat-icon>person_add</mat-icon>
+      <mat-icon fontSet="material-symbols-outlined">person_add</mat-icon>
       Ajouter
     </a>
 

@@ -1,0 +1,32 @@
+<mat-toolbar class="mobile-nav">
+  <nav aria-label="Navigation mobile">
+    <a
+      mat-icon-button
+      routerLink="/"
+      routerLinkActive="is-active"
+      ariaCurrentWhenActive="page"
+      [routerLinkActiveOptions]="{ exact: true }"
+      aria-label="Annuaire"
+    >
+      <mat-icon fontSet="material-symbols-outlined" aria-hidden="true">people</mat-icon>
+    </a>
+    <a
+      mat-icon-button
+      routerLink="/favoris"
+      routerLinkActive="is-active"
+      ariaCurrentWhenActive="page"
+      aria-label="Favoris"
+    >
+      <mat-icon fontSet="material-symbols-outlined" aria-hidden="true">star</mat-icon>
+    </a>
+    <a
+      mat-icon-button
+      routerLink="/ajouter"
+      routerLinkActive="is-active"
+      ariaCurrentWhenActive="page"
+      aria-label="Ajouter un contact"
+    >
+      <mat-icon fontSet="material-symbols-outlined" aria-hidden="true">person_add</mat-icon>
+    </a>
+  </nav>
+</mat-toolbar>
