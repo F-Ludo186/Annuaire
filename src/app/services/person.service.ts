@@ -1,14 +1,11 @@
 
-import { Injectable, afterNextRender, computed, inject, signal } from '@angular/core';
+import { Service, afterNextRender, computed, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom, timeout } from 'rxjs';
 
 import { NewPerson, PersonsCard, PersonApi, PeopleResponse } from '../models/person.model';
 
-
-@Injectable({
-    providedIn: 'root'
-})
+@Service()
 export class PersonService {
     private readonly favoritesStorageKey = 'annuaire-favorites';
 
@@ -44,6 +41,7 @@ export class PersonService {
             favori: this.favoriteIds().has(person.login.uuid)
         }))
     ]);
+    
     readonly count = computed(() => this.cards().length);
     readonly favoriteCount = computed(() =>
         this.cards().filter(person => person.favori).length
@@ -86,7 +84,7 @@ export class PersonService {
                 await this.Sleep(1000);
                 
                 const response = await firstValueFrom(
-                    this.http.get<PeopleResponse>(this.apiUrl).pipe(timeout({ first: 1000 }))
+                    this.http.get<PeopleResponse>(this.apiUrl).pipe(timeout({ first: 15000 }))
                 );
                 if (response.results.length > 0) {
                     data = response.results;

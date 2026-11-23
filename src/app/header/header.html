@@ -1,27 +1,46 @@
-<header class="header">
+<header class="header" [attr.aria-busy]="loading()">
+  @if (loading()) {
+    <span class="visually-hidden" role="status">Chargement de l’annuaire…</span>
+  }
+
   <div class="header-titles">
-    <h2>{{ title() }}</h2>
-    @if (loading() || error()) {
-      <h3>0 personnes</h3>
+    @if (loading()) {
+      <div class="header-skeleton-titles" aria-hidden="true">
+        <span class="header-skeleton-title"></span>
+        <span class="header-skeleton-count"></span>
+      </div>
     } @else {
-      <h3>{{ personCount() }} personnes</h3>
+      <h2>{{ title() }}</h2>
+      @if (error()) {
+        <h3>0 personnes</h3>
+      } @else {
+        <h3>{{ personCount() }} personnes</h3>
+      }
     }
   </div>
 
   <nav class="header-nav" aria-label="Navigation principale">
-    <a mat-button routerLink="/" aria-label="Annuaire">
-      <mat-icon fontSet="material-symbols-outlined">people</mat-icon>
-      Annuaire
-    </a>
-    <a mat-button routerLink="/favoris" [attr.aria-label]="'Favoris, ' + favoriteCount()">
-      <mat-icon fontSet="material-symbols-outlined">star</mat-icon>
-      Favoris ( {{ favoriteCount() }} )
-    </a>
+    @if (loading()) {
+      <span class="header-skeleton-nav" aria-hidden="true">
+        <span class="header-skeleton-link"></span>
+        <span class="header-skeleton-link"></span>
+        <span class="header-skeleton-link"></span>
+      </span>
+    } @else {
+      <a mat-button routerLink="/" aria-label="Annuaire">
+        <mat-icon fontSet="material-symbols-outlined">people</mat-icon>
+        Annuaire
+      </a>
+      <a mat-button routerLink="/favoris" [attr.aria-label]="'Favoris, ' + favoriteCount()">
+        <mat-icon fontSet="material-symbols-outlined">star</mat-icon>
+        Favoris ( {{ favoriteCount() }} )
+      </a>
 
-    <a mat-button routerLink="/ajouter" aria-label="Ajouter un contact">
-      <mat-icon fontSet="material-symbols-outlined">person_add</mat-icon>
-      Ajouter
-    </a>
+      <a mat-button routerLink="/ajouter" aria-label="Ajouter un contact">
+        <mat-icon fontSet="material-symbols-outlined">person_add</mat-icon>
+        Ajouter
+      </a>
+    }
 
   </nav>
 
